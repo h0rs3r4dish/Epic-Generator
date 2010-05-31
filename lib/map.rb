@@ -5,9 +5,7 @@ Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	2 -> river/water
 =end
 
-module Map
-
-	public
+module Map; class << self
 
 	def generate
 
@@ -71,4 +69,4 @@ module Map
 		}
 	end
 
-end
+end; end
