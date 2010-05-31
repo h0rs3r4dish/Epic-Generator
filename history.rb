@@ -1,6 +1,7 @@
 require "lib/creature"
 require "lib/map"
+require "lib/names"
 
-$map = generate_map
+$map = Map.generate
 
-print_map $map
+Map.display $map
