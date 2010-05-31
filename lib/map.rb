@@ -6,7 +6,7 @@ Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 =end
 
 def generate_map
-<<<<<<< HEAD
+
 	map = [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 			[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 			[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -54,10 +54,6 @@ def generate_map
 			next if i >= 10; map[i][centerx] = 1; mountains += 1
 		}
 	end
-=======
-	map = Array.new(12)
-	map.map { Array.new(12).each { |cell| 0 } } # Initialize with all plains
->>>>>>> c9d762c... Added a map test to the history.rb file, and started carving mountains out. Makes a variable-length cross at this point; the in-betweens still haven't been implemented
 	return map
 end
 
