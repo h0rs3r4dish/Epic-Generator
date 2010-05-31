@@ -1,11 +1,12 @@
 =begin
-Map data: 10x20 array of cells. Each cell is a square of land, one of 3 types:
+Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	0 -> plains
 	1 -> mountains
 	2 -> river/water
 =end
 
 def generate_map
+<<<<<<< HEAD
 	map = [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 			[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 			[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -53,14 +54,18 @@ def generate_map
 			next if i >= 10; map[i][centerx] = 1; mountains += 1
 		}
 	end
+=======
+	map = Array.new(12)
+	map.map { Array.new(12).each { |cell| 0 } } # Initialize with all plains
+>>>>>>> c9d762c... Added a map test to the history.rb file, and started carving mountains out. Makes a variable-length cross at this point; the in-betweens still haven't been implemented
 	return map
 end
 
 def print_map arr
 	letters = '.^~'.split('')
-	arr.each { |col|
-		col.each { |row|
-			print letters[row]
+	arr.each { |row|
+		arr.each { |col|
+			print letters[col]
 		}
 		print "\n"
 	}
