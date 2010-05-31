@@ -4,12 +4,12 @@ RACEDATA = {
 		:birthrate => 0.60
 	},
 	:elf => {
-		:deathrate => 0.45,
-		:birthrate => 0.60
+		:deathrate => 0.30,
+		:birthrate => 0.50
 	},
 	:terran => {
-		:deathrate => 0.45,
-		:birthrate => 0.60
+		:deathrate => 0.55,
+		:birthrate => 0.70
 	},
 	:dragon => {
 		:deathrate => 0,

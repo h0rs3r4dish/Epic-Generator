@@ -29,14 +29,27 @@ def generate_map
 		mountains += 1
 		((centerx)..(centerx-th)).each { |i|
 			next if i < 0; map[centery][i] = 1; mountains += 1
+			(centery)..(centery-(rand(4)+1)).each { |j|
+				next if j < 0; map[j][i] = 1; mountains += 1
+			}
+			(centery)..(centery+(rand(4)+1)).each { |j|
+				next if j < 0; map[j][i] = 1; mountains += 1
+			}
 		}
-		((centerx)..(centerx+bh)).each { |i|
+		((centerx+1)..(centerx+bh)).each { |i|
 			next if i >= 20; map[centery][i] = 1; mountains += 1
+			next if i < 0; map[centery][i] = 1; mountains += 1
+			(centery)..(centery-(rand(4)+1)).each { |j|
+				next if j < 0; map[j][i] = 1; mountains += 1
+			}
+			(centery)..(centery+(rand(4)+1)).each { |j|
+				next if j < 0; map[j][i] = 1; mountains += 1
+			}
 		}
-		((centery)..(centery-lw)).each { |i|
+		((centery-1)..(centery-lw)).each { |i|
 			next if i < 0; map[i][centerx] = 1; mountains += 1
 		}
-		((centery)..(centery+rw)).each { |i|
+		((centery+1)..(centery+rw)).each { |i|
 			next if i >= 10; map[i][centerx] = 1; mountains += 1
 		}
 	end
