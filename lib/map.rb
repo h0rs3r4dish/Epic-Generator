@@ -30,21 +30,21 @@ def generate_map
 		mountains += 1
 		((centerx)..(centerx-th)).each { |i|
 			next if i < 0; map[centery][i] = 1; mountains += 1
-			(centery)..(centery-(rand(4)+1)).each { |j|
+			((centery)..(centery-(rand(4)+1))).each { |j|
 				next if j < 0; map[j][i] = 1; mountains += 1
 			}
-			(centery)..(centery+(rand(4)+1)).each { |j|
-				next if j < 0; map[j][i] = 1; mountains += 1
+			((centery)..(centery+(rand(4)+1))).each { |j|
+				next if j >= 10; map[j][i] = 1; mountains += 1
 			}
 		}
 		((centerx+1)..(centerx+bh)).each { |i|
 			next if i >= 20; map[centery][i] = 1; mountains += 1
 			next if i < 0; map[centery][i] = 1; mountains += 1
-			(centery)..(centery-(rand(4)+1)).each { |j|
+			((centery)..(centery-(rand(4)+1))).each { |j|
 				next if j < 0; map[j][i] = 1; mountains += 1
 			}
-			(centery)..(centery+(rand(4)+1)).each { |j|
-				next if j < 0; map[j][i] = 1; mountains += 1
+			((centery)..(centery+(rand(4)+1))).each { |j|
+				next if j >= 10; map[j][i] = 1; mountains += 1
 			}
 		}
 		((centery-1)..(centery-lw)).each { |i|
@@ -60,7 +60,7 @@ end
 def print_map arr
 	letters = '.^~'.split('')
 	arr.each { |row|
-		arr.each { |col|
+		row.each { |col|
 			print letters[col]
 		}
 		print "\n"
