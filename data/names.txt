@@ -247,7 +247,8 @@ Davis
 Davon
 Dawson
 Dayton
-Dean	Deandre
+Dean
+Deandre
 Deangelo
 Declan
 Demarcus
@@ -496,7 +497,8 @@ Javier
 Javion
 Javon
 Jaxon
-Jaxson 	Jay
+Jaxson
+Jay
 Jayce
 Jayden
 Jaydon
@@ -745,7 +747,8 @@ Nikhil
 Nikolas
 Noah
 Noe
-Noel 	Nolan
+Noel
+Nolan
 Norman
 Octavio
 Oliver
