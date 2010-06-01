@@ -13,7 +13,8 @@ module Civ
 				LOG.puts "Center: (%s,%s)" % [cx, cy]
 				(rand(3)+1).times do
 					loc = [ cx+deviation[rand(7)], cy+deviation[rand(7)] ]
-					while townlist.include? loc
+					while townlist.include? loc or loc[0] < 0 or loc[1] < 0 or \
+						loc[0] >= 20 or loc[1] >= 10
 						loc = [ cx+deviation[rand(7)], cy+deviation[rand(7)] ]
 					end
 					townlist.push loc
