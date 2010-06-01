@@ -26,6 +26,7 @@ RACEDATA = {
 }
 
 RACES = RACEDATA.keys
+MUNDANE_RACES = [ :human, :elf, :terran ]
 
 Creature = Struct.new(:name, :race, :age, :attack, :defense, :kills, :legend) do
 	def initialize(name='',race=:human,age=1,attack=0,defense=0,kills=0,legend=0)

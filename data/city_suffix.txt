@@ -2,11 +2,12 @@
 's City
 's Capital
 's Pride
-'s Bane
 's Fortress
  City
-Glenn
-Har
+glenn
+har
  Fields
 ville
  Grandeur
+stown
+ton
