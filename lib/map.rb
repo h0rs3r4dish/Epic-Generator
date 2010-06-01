@@ -109,12 +109,17 @@ module Map; class << self
 
 	def display arr
 		letters = '.^~'.split('')
+		escapes = [ '', '', '' ]
+		if $flag_color then
+			escapes = "\033[32m \033[37m \033[34m".split(' ')
+		end
 		arr.each { |row|
 			row.each { |col|
-				print letters[col]
+				print escapes[col]+letters[col]
 			}
 			print "\n"
 		}
+		print "\033[m" if $flag_color
 	end
 
 end; end
