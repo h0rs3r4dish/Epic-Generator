@@ -23,7 +23,7 @@ LOG = File.new($flag_logfile, 'w')
 $terrain = Map.generate
 Map.display $terrain
 
-$map = Map.init
+$map = Map.init.map { |y| y.map { |x| Array.new } }
 
 Name.init
 Civ.init $map

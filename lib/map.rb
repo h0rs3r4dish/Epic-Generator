@@ -31,7 +31,6 @@ module Map; class << self
 			while map[centery][centerx] == 1
 				centerx = rand(20); centery = rand(10); # No repeat centers
 			end
-		
 			map[centery][centerx] = 1 # Set the center
 			mountains += 1
 			((centerx)..(centerx-th)).each { |i|

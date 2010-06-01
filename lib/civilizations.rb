@@ -6,6 +6,7 @@ module Civ
 		def init(map)
 			deviation = [-3, -2, -1, 0, 1, 2, 3]
 			townlist = Array.new
+			totalpop = 0
 			MUNDANE_RACES.each { |race|
 				LOG.puts "Processing civilization for %s" % race
 				towns = Array.new
@@ -22,8 +23,30 @@ module Civ
 					LOG.puts "%s city %s at (%s, %s)" % ([race, name]+loc)
 					towns.push Town.new(race, name, loc)
 				end
-				@civs[race] = Civilization.new(race)
+				@civs[race] = Civilization.new(race, towns)
 			}
+			puts "Towns: %s" % townlist.length
+			@civs.each_pair { |race, civ|
+				civ.towns.each { |town|
+					tx, ty = town.location
+					population = rand(450)+50
+					population.times do
+						totalpop += 1
+						cx, cy = tx, ty
+						if rand(2) == 0 then
+							cx = tx + deviation[rand(5)+1]
+							cy = ty + deviation[rand(5)+1]
+							while cx < 0 or cy < 0 or cx >= 20 or cy >= 10
+								cx = tx + deviation[rand(5)+1]
+								cy = ty + deviation[rand(5)+1]
+							end
+						end
+						map[cy][cx].push Creature.new(Name.generate_base,
+							town.race, rand(25), rand(20), rand(10)+1, 0, 0)
+					end
+				}
+			}
+			puts "Population: %s" % totalpop
 		end
 	end
 	
