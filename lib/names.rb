@@ -48,7 +48,7 @@ module Name
 		end
 	
 		def generate_mountain
-			return generate_base + @mtn_postfixes[rand(@mtn_postfixes.length)]
+			return generate_base + @mnt_postfixes[rand(@mnt_postfixes.length)]
 		end
 		
 	end
