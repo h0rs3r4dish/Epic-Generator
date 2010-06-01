@@ -9,16 +9,14 @@ module Name
 	class << self
 	
 		def init
-			namelist = IO.readlines('data/names.txt').map { |l| l.strip.downcase }
-			namelist.each { |name|
+			IO.readlines('data/names.txt').map { |l| l.strip.downcase }.each { |name|
 				loc = 0
-				@startpairs.push( name[loc] + name[loc+1] )
+				@startpairs.push( name.slice(loc,2) )
 				while name.length > loc+3
-					firstpair = name[loc] + name[loc+1]
-					secondpair = name[loc+2]
-					secondpair += name[loc+3] if name.length > loc+4
+					firstpair = name.slice(loc,2)
+					follower = name[loc+2]
 					@relations[firstpair] ||= Array.new
-					@relations[firstpair].push secondpair
+					@relations[firstpair].push follower
 					loc += 1
 				end
 			}
@@ -32,7 +30,8 @@ module Name
 			word = @startpairs[rand(@startpairs.length)]
 			wl = word.length
 			while wl < min_length
-				choices = @relations[word[wl-2]+word[wl-1]]
+				choices = @relations[word.slice(-2,2)]
+				break if not choices
 				word += choices[rand(choices.length)]
 				wl = word.length
 			end
