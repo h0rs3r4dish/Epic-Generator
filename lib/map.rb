@@ -5,10 +5,11 @@ Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	2 -> river/water
 =end
 
+require "lib/screen"
+
 module Map; class << self
 
 	def generate
-
 		map = [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -21,7 +22,9 @@ module Map; class << self
 				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ], ]
 		mountains = 0.0
 		mount_threshold = (((rand % 25) * 25) + 5) / 100.0
-		while (mountains / 200) < mount_threshold
+		print "Mountain coverage: 00%"
+		percent = (mountains / 200)
+		while percent < mount_threshold
 			th = rand(4) + 1; bh = rand(4) + 1; lw = rand(4) + 1; rw = rand(4) + 1
 			centerx = rand(10); centery = rand(10);
 			while map[centery][centerx] == 1
@@ -55,7 +58,18 @@ module Map; class << self
 			((centery+1)..(centery+rw)).each { |i|
 				next if i >= 10; map[i][centerx] = 1; mountains += 1
 			}
+			
+			percent = (mountains / 200)
+			move_cursor_left 3; print "%02d%%" % (percent * 100).to_i
 		end
+		
+		puts
+		
+		rivermax = rand(4)+2
+		rivermax.times do
+		
+		end
+		
 		return map
 	end
 
