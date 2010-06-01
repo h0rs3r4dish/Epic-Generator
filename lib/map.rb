@@ -111,7 +111,7 @@ module Map; class << self
 		letters = '.^~'.split('')
 		escapes = [ '', '', '' ]
 		if $flag_color then
-			escapes = "\033[32m \033[37m \033[34m".split(' ')
+			escapes = "\033[32;2m \033[37;2m \033[34;1m".split(' ')
 		end
 		arr.each { |row|
 			row.each { |col|
