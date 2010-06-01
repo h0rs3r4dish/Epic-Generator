@@ -1,4 +1,3 @@
-require "lib/screen"
 require "lib/creature"
 require "lib/map"
 require "lib/names"

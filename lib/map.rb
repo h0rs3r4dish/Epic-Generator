@@ -5,8 +5,6 @@ Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	2 -> river/water
 =end
 
-require "lib/screen"
-
 module Map; class << self
 
 	def generate
@@ -22,7 +20,6 @@ module Map; class << self
 				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ], ]
 		mountains = 0.0
 		mount_threshold = (((rand % 25) * 25) + 5) / 100.0
-		print "Mountain coverage: 00%"
 		percent = (mountains / 200)
 		while percent < mount_threshold
 			th = rand(4) + 1; bh = rand(4) + 1; lw = rand(4) + 1; rw = rand(4) + 1
@@ -60,15 +57,13 @@ module Map; class << self
 			}
 			
 			percent = (mountains / 200)
-			move_cursor_left 3; print "%02d%%" % (percent * 100).to_i
 		end
 		
-		puts
+		puts "Mountain coverage: %02d%%" % (percent * 100)
 		
 		rivermax = rand(4)+2
-		print "Rivers: 0/#{rivermax}"; move_cursor_left 2
+		puts "Rivers: #{rivermax}"
 		rivermax.times do |i|
-			move_cursor_left 1; print i+1
 			sx = rand(17)+1; sy = rand(7)+1; dir = :none
 			while dir == :none
 				if map[sy][sx] == 0 then
@@ -109,21 +104,17 @@ module Map; class << self
 			end
 		end
 		
-		puts
-		
 		return map
 	end
 
 	def display arr
 		letters = '.^~'.split('')
-		escapes = '274'.split('')
 		arr.each { |row|
 			row.each { |col|
-				print "\033[3"+escapes[col]+'m'+letters[col]
+				print letters[col]
 			}
 			print "\n"
 		}
-		print "\033[m"
 	end
 
 end; end
