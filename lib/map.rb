@@ -66,21 +66,64 @@ module Map; class << self
 		puts
 		
 		rivermax = rand(4)+2
-		rivermax.times do
-		
+		print "Rivers: 0/#{rivermax}"; move_cursor_left 2
+		rivermax.times do |i|
+			move_cursor_left 1; print i+1
+			sx = rand(17)+1; sy = rand(7)+1; dir = :none
+			while dir == :none
+				if map[sy][sx] == 0 then
+					dir = :down if map[sy-1][sx] == 1
+					dir = :up if map[sy+1][sx] == 1
+					dir = :right if map[sy][sx-1] == 1
+					dir = :left if map[sy][sx+1] == 1
+				end
+				if dir == :none then
+					sx = rand(17)+1; sy = rand(7)+1;
+				end
+			end
+			lastturn = true
+			cx = sx; cy = sy
+			while cx >= 0 and cy >= 0 and cx < 20 and cy < 10
+				map[cy][cx] = 2
+				lastturn = (rand > 0.5) if not lastturn
+				if lastturn then
+					case dir
+						when :up
+							cy -= 1
+						when :down
+							cy += 1
+						when :left
+							cx -= 1
+						when :right
+							cx += 1
+					end
+					lastturn = false
+				else
+					if dir == :up or dir == :down then
+						cx += (rand > 0.5) ? 1 : -1
+					else
+						cy += (rand > 0.5) ? 1 : -1
+					end
+					lastturn = true		
+				end
+			end
 		end
+		
+		puts
 		
 		return map
 	end
 
 	def display arr
 		letters = '.^~'.split('')
+		escapes = '274'.split('')
 		arr.each { |row|
 			row.each { |col|
-				print letters[col]
+				print "\033[3"+escapes[col]+'m'+letters[col]
 			}
 			print "\n"
 		}
+		print "\033[m"
 	end
 
 end; end
