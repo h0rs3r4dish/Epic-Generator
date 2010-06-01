@@ -14,7 +14,7 @@ module Name
 				@startpairs.push( name.slice(loc,2) )
 				while name.length > loc+3
 					firstpair = name.slice(loc,2)
-					follower = name[loc+2]
+					follower = name[loc+2].chr
 					@relations[firstpair] ||= Array.new
 					@relations[firstpair].push follower
 					loc += 1
