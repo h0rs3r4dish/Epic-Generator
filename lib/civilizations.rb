@@ -7,6 +7,7 @@ module Civ
 			deviation = [-3, -2, -1, 0, 1, 2, 3]
 			townlist = Array.new
 			totalpop = 0
+			LOG.puts "Generating mundane populations"
 			MUNDANE_RACES.each { |race|
 				LOG.puts "Processing civilization for %s" % race
 				towns = Array.new
@@ -45,11 +46,37 @@ module Civ
 							end
 						end
 						map[cy][cx].push Creature.new(Name.generate_base,
-							town.race, rand(25), rand(20), rand(10)+1, 0, 0)
+							town.race, rand(25), rand(20), rand(10)+1, 0, 1)
 					end
 				}
 			}
 			puts "Population: %s" % totalpop
+			LOG.puts "Generating megabeasts"
+			tilt = rand(3)
+			megabeast_races = RACES - MUNDANE_RACES
+			tilt_race = megabeast_races[tilt]
+			LOG.puts "Favoring %s" % tilt_race
+			other_races = megabeast_races - [tilt_race]
+			megacount = 0
+			(rand(31)+10).times do
+				name = Name.generate_base
+				LOG.puts "%s the %s" % [name, tilt_race]
+				map[rand(10)][rand(20)].push Creature.new(name, tilt_race,
+					rand(81)+20, rand(67)+20, rand(41)+10, 0, 1)
+				megacount += 1
+			end
+			2.times { |i|
+				currace = other_races[i]
+				LOG.puts "Handling %s" % currace
+				(rand(21)+5).times do
+					name = Name.generate_base
+					LOG.puts "%s the %s" % [name, currace]
+					map[rand(10)][rand(20)].push Creature.new(name, tilt_race,
+						rand(81)+20, rand(67)+20, rand(41)+10, 0, 1)
+					megacount += 1
+				end
+			}
+			puts "Megabeasts: %s" % megacount
 		end
 		
 		def civs; return @civs; end
