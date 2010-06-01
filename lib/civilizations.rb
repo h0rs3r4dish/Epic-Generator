@@ -11,7 +11,7 @@ module Civ
 				LOG.puts "Processing civilization for %s" % race
 				towns = Array.new
 				cx = rand(20); cy = rand(10)
-				LOG.puts "Center: (%s,%s)" % [cx, cy]
+				LOG.puts "\tCenter: (%s,%s)" % [cx, cy]
 				(rand(3)+1).times do
 					loc = [ cx+deviation[rand(7)], cy+deviation[rand(7)] ]
 					while townlist.include? loc or loc[0] < 0 or loc[1] < 0 or \
@@ -20,16 +20,19 @@ module Civ
 					end
 					townlist.push loc
 					name = Name.generate_city
-					LOG.puts "%s city %s at (%s, %s)" % ([race, name]+loc)
+					LOG.puts "\t%s city %s at (%s, %s)" % ([race, name]+loc)
 					towns.push Town.new(race, name, loc)
 				end
 				@civs[race] = Civilization.new(race, towns)
 			}
 			puts "Towns: %s" % townlist.length
 			@civs.each_pair { |race, civ|
+				LOG.puts "Populating %s towns" % race
 				civ.towns.each { |town|
+					LOG.print "\tPopulating %s: " % town.name
 					tx, ty = town.location
 					population = rand(450)+50
+					LOG.puts population
 					population.times do
 						totalpop += 1
 						cx, cy = tx, ty
