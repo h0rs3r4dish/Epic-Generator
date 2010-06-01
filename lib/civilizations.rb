@@ -51,6 +51,8 @@ module Civ
 			}
 			puts "Population: %s" % totalpop
 		end
+		
+		def civs; return @civs; end
 	end
 	
 	class Civilization

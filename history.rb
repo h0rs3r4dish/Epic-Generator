@@ -27,6 +27,7 @@ $map = Map.init.map { |y| y.map { |x| Array.new } }
 
 Name.init
 Civ.init $map
+Map.display $terrain, Civ.civs
 
 def tick
 	return rand(10)

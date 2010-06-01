@@ -110,15 +110,26 @@ module Map; class << self
 		return map
 	end
 
-	def display arr
+	def display terrain, civs=nil
+		towns = Array.new
+		if civs then
+			civs.each_value { |civ|
+				towns += civ.towns
+			}
+		end
 		letters = '.^~'.split('')
 		escapes = [ '', '', '' ]
 		if $flag_color then
 			escapes = "\033[32;2m \033[37;2m \033[34;1m".split(' ')
 		end
-		arr.each { |row|
-			row.each { |col|
-				print escapes[col]+letters[col]
+		(0...10).each { |y|
+			(0...20).each { |x|
+				ter = terrain[y][x]
+				twn = :none
+				towns.each { |t|
+					twn = t.race if t.location == [x, y]
+				}
+				print escapes[ter]+ ((twn == :none) ? letters[ter] : '@')
 			}
 			print "\n"
 		}
