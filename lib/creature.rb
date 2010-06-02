@@ -1,3 +1,5 @@
+module History
+
 RACEDATA = {
 	:human => {
 		:deathrate => 0.45,
@@ -38,4 +40,6 @@ Creature = Struct.new(:name, :race, :attack, :defense, :hp, :kills, :legend) do
 		self.kills   = kills
 		self.legend  = legend
 	end
+end
+
 end

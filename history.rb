@@ -20,14 +20,14 @@ ARGV.each { |arg|
 
 LOG = File.new($flag_logfile, 'w')
 
-$terrain = Map.generate
-Map.display $terrain
+terrain = History::Terrain.new
+terrain.display
 
-$map = Map.init.map { |y| y.map { |x| Array.new } }
+$map = History::Terrain.blank.map { |row| row.map { Array.new } }
 
-Name.init
-Civ.init $map
-Map.display $terrain, Civ.civs
+namegen = History::NameGen.new
+civilizations = History::Civilizations.new $map, namegen
+terrain.display civilizations.civs
 
 def tick
 	return rand(10)

@@ -1,3 +1,5 @@
+module History
+
 =begin
 Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	0 -> plains
@@ -5,23 +7,19 @@ Map data: 12x12 array of cells. Each cell is a square of land, one of 3 types:
 	2 -> river/water
 =end
 
-module Map; class << self
+class Terrain
+	attr_reader :terrain
 
-	def init
-		return [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-			  	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
-				[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]]
+	def Terrain.blank
+		return Array.new(10).map { Array.new(20) }
 	end
-
+	
+	def initialize
+		@terrain = generate
+	end
+	
 	def generate
-		map = init
+		map = Terrain.blank.map { |row| row.map { 0 } }
 		mountains = 0.0
 		mount_threshold = (((rand % 25) * 25) + 5) / 100.0
 		percent = (mountains / 200)
@@ -110,7 +108,7 @@ module Map; class << self
 		return map
 	end
 
-	def display terrain, civs=nil
+	def display civs=nil
 		towns = Array.new
 		if civs then
 			civs.each_value { |civ|
@@ -124,7 +122,7 @@ module Map; class << self
 		end
 		(0...10).each { |y|
 			(0...20).each { |x|
-				ter = terrain[y][x]
+				ter = @terrain[y][x]
 				twn = :none
 				towns.each { |t|
 					twn = t.race if t.location == [x, y]
@@ -136,4 +134,6 @@ module Map; class << self
 		print "\033[m" if $flag_color
 	end
 
-end; end
+end
+
+end
