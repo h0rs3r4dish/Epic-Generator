@@ -3,9 +3,11 @@ require "lib/map"
 require "lib/names"
 require "lib/civilizations"
 
-$flag_color = false
-$flag_maxyear = 500
-$flag_logfile = "history.log"
+$flag_color    = false
+$flag_maxyear  = 500
+$flag_outdir   = "out/"
+$flag_logfile  = "history.log"
+$flag_histfile = "world_history.txt"
 
 ARGV.each { |arg|
 	case arg
@@ -15,10 +17,16 @@ ARGV.each { |arg|
 			$flag_maxyear = $1.to_i
 		when /\-\-logfile=(.+)/
 			$flag_logfile = $1
+		when /\-\-outdir=(.+)/
+			$flag_outfile = $1
+		when /\-\-histfile=(.+)/
+			$flag_histfile = $1
 	end
 }
 
-LOG = File.new($flag_logfile, 'w')
+Dir.mkdir $flag_outdir if not Dir.exist? $flag_outdir
+
+LOG = File.new(File.join($flag_outdir, $flag_logfile), 'w')
 
 terrain = History::Terrain.new
 terrain.display
